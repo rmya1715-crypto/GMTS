@@ -111,8 +111,8 @@ function App() {
 
   return (
     <div className="app">
-      <h1>TaskFlow</h1>
-      <p>A simple task manager that stores data in your browser.</p>
+      <h1>TaskFlow</h1> 
+      <p>A simple task manager that stores data in your browser.</p> 
 
       <TaskForm
         onSubmit={handleSave}
