@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CSC400 Task Flow Base Code
 
 A simple task management application built with React and Vite. Tasks are stored in the browser with `localStorage` — there is no backend or database.
@@ -59,3 +60,7 @@ csc400-task-flow-base-code-wiktor/
 - Due-date reminders
 - Export / import tasks as JSON
 - Connect to a backend API for multi-device sync
+=======
+# GMTS
+Final Project repo
+>>>>>>> 95adebcc8785965d4f8332d2453fa2b6b553c342
