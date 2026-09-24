@@ -3,6 +3,8 @@ import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/TaskList.jsx';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
 
+const SAMPLE_TASKS_VERSION = 1;
+
 const SAMPLE_TASKS = [
   {
     id: crypto.randomUUID(),
@@ -33,12 +35,12 @@ const SAMPLE_TASKS = [
 function getInitialTasks() {
   const stored = loadTasks();
 
-  if (stored === null) {
-    saveTasks(SAMPLE_TASKS);
+  if (stored === null || stored.version !== SAMPLE_TASKS_VERSION) {
+    saveTasks(SAMPLE_TASKS, SAMPLE_TASKS_VERSION);
     return SAMPLE_TASKS;
   }
 
-  return stored;
+  return stored.tasks;
 }
 
 function App() {
@@ -74,7 +76,7 @@ function App() {
     }
 
     setTasks(updatedTasks);
-    saveTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
   }
 
   function handleEdit(task) {
@@ -94,7 +96,7 @@ function App() {
 
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
-    saveTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
 
     if (editingTask && editingTask.id === id) {
       setEditingTask(null);
@@ -106,7 +108,7 @@ function App() {
       task.id === id ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
-    saveTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
   }
 
   return (
