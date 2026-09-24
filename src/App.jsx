@@ -3,29 +3,31 @@ import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/TaskList.jsx';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
 
+const SAMPLE_TASKS_VERSION = 1;
+
 const SAMPLE_TASKS = [
   {
     id: crypto.randomUUID(),
-    title: 'Buy groceries',
-    description: 'Milk, eggs, bread, and coffee.',
-    dueDate: '2026-07-20',
+    title: 'Update Games',
+    description: 'Update: Call of Duty, Fortnite, Minecraft, GTA V.',
+    dueDate: '2026-10-01',
     priority: 'medium',
     completed: false,
   },
   {
     id: crypto.randomUUID(),
-    title: 'Finish project report',
-    description: 'Write the summary section and proofread.',
-    dueDate: '2026-07-18',
+    title: 'GMTS Features',
+    description: 'Implement GTA features in the GMTS project.',
+    dueDate: '2026-11-18',
     priority: 'high',
     completed: false,
   },
   {
     id: crypto.randomUUID(),
-    title: 'Call the dentist',
-    description: 'Schedule a cleaning appointment.',
-    dueDate: '2026-07-25',
-    priority: 'low',
+    title: 'Send Updates in GroupMe',
+    description: 'Send Updates about changes and Idead to GroupMembers in GroupMe.',
+    dueDate: '2026-09-25',
+    priority: 'High',
     completed: true,
   },
 ];
@@ -33,12 +35,12 @@ const SAMPLE_TASKS = [
 function getInitialTasks() {
   const stored = loadTasks();
 
-  if (stored === null) {
-    saveTasks(SAMPLE_TASKS);
+  if (stored === null || stored.version !== SAMPLE_TASKS_VERSION) {
+    saveTasks(SAMPLE_TASKS, SAMPLE_TASKS_VERSION);
     return SAMPLE_TASKS;
   }
 
-  return stored;
+  return stored.tasks;
 }
 
 function App() {
@@ -74,7 +76,7 @@ function App() {
     }
 
     setTasks(updatedTasks);
-    saveTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
   }
 
   function handleEdit(task) {
@@ -94,7 +96,7 @@ function App() {
 
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
-    saveTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
 
     if (editingTask && editingTask.id === id) {
       setEditingTask(null);
@@ -106,7 +108,7 @@ function App() {
       task.id === id ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
-    saveTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
   }
 
   return (

@@ -7,9 +7,12 @@ export function loadTasks() {
     return null;
   }
 
-  return JSON.parse(stored);
+  const parsed = JSON.parse(stored);
+
+  // Support the array format saved by earlier versions of the app.
+  return Array.isArray(parsed) ? { tasks: parsed, version: null } : parsed;
 }
 
-export function saveTasks(tasks) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+export function saveTasks(tasks, version) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({ tasks, version }));
 }
