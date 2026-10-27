@@ -36,9 +36,10 @@ select {
   font: inherit;
 }
 
-button {
-  color: inherit;
-  cursor: pointer;
+h1 {
+  margin-bottom: 4px;
+  color:aqua;
+  
 }
 
 button:focus-visible,
