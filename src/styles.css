@@ -27,6 +27,45 @@ h2 {
   margin-bottom: 12px;
 }
 
+.task-statistics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-top-width: 4px;
+  background: #fff;
+}
+
+.active-stat {
+  border-top-color: #2b6cb0;
+}
+
+.completed-stat {
+  border-top-color: #2f855a;
+}
+
+.stat-count,
+.stat-label {
+  display: block;
+}
+
+.stat-count {
+  font-size: 2rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.stat-label {
+  margin-top: 8px;
+  color: #555;
+}
+
 .task-form {
   margin-top: 24px;
   padding: 16px;
@@ -97,6 +136,16 @@ button {
   font: inherit;
   padding: 6px 12px;
   cursor: pointer;
+}
+
+@media (max-width: 420px) {
+  .task-statistics {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
 }
 
 .empty-message {

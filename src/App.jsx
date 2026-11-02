@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/TaskList.jsx';
+import TaskStatistics from './components/TaskStatistics.jsx';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
 
 const SAMPLE_TASKS_VERSION = 1;
@@ -115,6 +116,8 @@ function App() {
     <div className="app">
       <h1>TaskFlow</h1> 
       <p>A simple task manager that stores data in your browser.</p> 
+
+      <TaskStatistics tasks={tasks} />
 
       <TaskForm
         onSubmit={handleSave}
