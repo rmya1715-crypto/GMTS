@@ -578,6 +578,109 @@ select:focus-visible {
   white-space: nowrap;
 }
 
+.subtask-summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.subtask-toggle {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--purple);
+  font-size: 8px;
+  white-space: nowrap;
+}
+
+.subtask-progress {
+  width: 48px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #e9eaf0;
+}
+
+.subtask-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--purple);
+}
+
+.subtask-panel {
+  grid-column: 1 / -1;
+  padding: 8px 0 5px 22px;
+}
+
+.subtask-list {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.subtask-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #55566b;
+  font-size: 9px;
+}
+
+.subtask-item.completed span {
+  color: #85879a;
+  text-decoration: line-through;
+}
+
+.subtask-empty {
+  margin: 0 0 8px;
+  color: #85879a;
+  font-size: 9px;
+}
+
+.subtask-form {
+  display: flex;
+  max-width: 320px;
+  gap: 5px;
+}
+
+.subtask-form input {
+  min-width: 0;
+  flex: 1;
+  padding: 5px 7px;
+  border: 1px solid #dedfe7;
+  border-radius: 4px;
+  font-size: 9px;
+}
+
+.subtask-form button {
+  padding: 0 8px;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--purple);
+  font-size: 9px;
+}
+
+.subtask-error {
+  margin: 4px 0 0;
+  color: #b53f51;
+  font-size: 9px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
 .category-badge {
   justify-self: start;
   padding: 3px 6px;

@@ -1,6 +1,13 @@
 import TaskItem from './TaskItem.jsx';
 
-function TaskList({ tasks, onEdit, onDelete, onToggleComplete }) {
+function TaskList({
+  tasks,
+  onEdit,
+  onDelete,
+  onToggleComplete,
+  onAddSubtask,
+  onToggleSubtaskComplete,
+}) {
   if (tasks.length === 0) {
     return <p className="empty-message">No tasks yet. Add one above.</p>;
   }
@@ -14,6 +21,8 @@ function TaskList({ tasks, onEdit, onDelete, onToggleComplete }) {
           onEdit={onEdit}
           onDelete={onDelete}
           onToggleComplete={onToggleComplete}
+          onAddSubtask={onAddSubtask}
+          onToggleSubtaskComplete={onToggleSubtaskComplete}
         />
       ))}
     </ul>

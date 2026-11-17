@@ -91,6 +91,7 @@ function getInitialTasks() {
   return stored.tasks.map((task) => ({
     ...task,
     category: task.category || 'Academic',
+    subtasks: task.subtasks || [],
   }));
 }
 
@@ -165,6 +166,39 @@ function App() {
   function handleToggleComplete(id) {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
+  }
+
+  function handleAddSubtask(taskId, title) {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId
+        ? {
+            ...task,
+            subtasks: [
+              ...(task.subtasks || []),
+              { id: crypto.randomUUID(), title, completed: false },
+            ],
+          }
+        : task
+    );
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
+  }
+
+  function handleToggleSubtaskComplete(taskId, subtaskId) {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId
+        ? {
+            ...task,
+            subtasks: (task.subtasks || []).map((subtask) =>
+              subtask.id === subtaskId
+                ? { ...subtask, completed: !subtask.completed }
+                : subtask
+            ),
+          }
+        : task
     );
     setTasks(updatedTasks);
     saveTasks(updatedTasks, SAMPLE_TASKS_VERSION);
@@ -303,6 +337,8 @@ function App() {
                   onEdit={handleEdit}
                   onDelete={handleDelete}
                   onToggleComplete={handleToggleComplete}
+                  onAddSubtask={handleAddSubtask}
+                  onToggleSubtaskComplete={handleToggleSubtaskComplete}
                 />
               </section>
 
