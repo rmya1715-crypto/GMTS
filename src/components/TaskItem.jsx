@@ -19,6 +19,9 @@ function TaskItem({ task, onEdit, onDelete, onToggleComplete }) {
       <div className="task-info">
         <h3>{task.title}</h3>
         <p>{task.description || 'No description'}</p>
+        {task.estimatedHours > 0 && (
+          <span className="task-estimate">◷ Est. {task.estimatedHours}h</span>
+        )}
       </div>
       <span className={`category-badge ${task.category.toLowerCase()}`}>{task.category}</span>
       <span className="task-due">{formattedDueDate}</span>

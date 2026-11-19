@@ -7,6 +7,7 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
   const [priority, setPriority] = useState('medium');
   const [category, setCategory] = useState('Academic');
   const [error, setError] = useState('');
+  const [estimatedHours, setEstimatedHours] = useState('');
 
   useEffect(() => {
     if (editingTask) {
@@ -15,6 +16,7 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
       setDueDate(editingTask.dueDate);
       setPriority(editingTask.priority);
       setCategory(editingTask.category || 'Academic');
+      setEstimatedHours(editingTask.estimatedHours ? String(editingTask.estimatedHours) : '');
       setError('');
     } else {
       setTitle('');
@@ -22,6 +24,7 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
       setDueDate('');
       setPriority('medium');
       setCategory('Academic');
+      setEstimatedHours('');
       setError('');
     }
   }, [editingTask]);
@@ -42,7 +45,10 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
       dueDate,
       priority,
       category,
+      estimatedHours: Number(estimatedHours) || 0,
     });
+
+    setEstimatedHours(''); 
 
     setTitle('');
     setDescription('');
@@ -95,6 +101,20 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
           onChange={(event) => setDueDate(event.target.value)}
         />
       </div>
+
+      <div className="form-field">
+        <label htmlFor="estimatedHours">Estimated Time (hours)</label>
+        <input
+          id="estimatedHours"
+          type="number"
+          min="0"
+          step="0.5"
+          placeholder="e.g. 2"
+          value={estimatedHours}
+          onChange={(event) => setEstimatedHours(event.target.value)}
+        />
+      </div>
+      
 
       <div className="form-field">
         <label htmlFor="category">Category</label>

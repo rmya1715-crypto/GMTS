@@ -1156,3 +1156,139 @@ select:focus-visible {
     padding: 20px 16px;
   }
 }
+.task-estimate {
+  display: inline-block;
+  margin-top: 2px;
+  color: var(--purple);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.calendar-day-hours {
+  display: block;
+  margin: 2px 0 1px;
+  color: var(--purple);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.planner-panel {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.planner-toolbar {
+  display: flex;
+  min-width: 700px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.planner-toolbar h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.planner-toolbar p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.planner-grid {
+  display: grid;
+  min-width: 700px;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.planner-day {
+  min-width: 0;
+  min-height: 190px;
+  padding: 10px 8px;
+  border-right: 1px solid #f0f1f4;
+  background: #fff;
+}
+
+.planner-day:last-child {
+  border-right: 0;
+}
+
+.planner-day.is-today {
+  background: var(--purple-pale);
+}
+
+.planner-day-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 10px;
+}
+
+.planner-day-header span {
+  color: var(--muted);
+}
+
+.planner-bar-track {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #eceef4;
+}
+
+.planner-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--purple);
+}
+
+.planner-hours {
+  margin: 5px 0 10px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.planner-tasks {
+  display: grid;
+  gap: 4px;
+}
+
+.planner-task {
+  display: grid;
+  gap: 1px;
+  padding: 4px 6px;
+  border: 0;
+  border-left: 2px solid var(--purple);
+  border-radius: 3px;
+  color: var(--purple);
+  background: var(--purple-pale);
+  font-size: 9px;
+  text-align: left;
+}
+
+.planner-task span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.planner-task small {
+  color: var(--muted);
+  font-size: 8px;
+}
+
+.planner-task.done {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.planner-empty {
+  margin: 0;
+  color: #a0a2b1;
+  font-size: 9px;
+}

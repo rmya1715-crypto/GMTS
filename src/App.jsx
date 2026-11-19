@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CalendarView from './components/CalendarView.jsx';
 import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/TaskList.jsx';
+import WeeklyPlanner from './components/WeeklyPlanner.jsx';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
 
 const SAMPLE_TASKS_VERSION = 1;
@@ -211,6 +212,13 @@ function App() {
           >
             <span className="nav-icon">▤</span><span>Calendar</span>
           </button>
+          <button
+            className={activeView === 'planner' ? 'nav-link active' : 'nav-link'}
+            type="button"
+            onClick={() => setActiveView('planner')}
+            >
+            <span className="nav-icon">◷</span><span>Study planner</span>  
+            </button>
         </nav>
 
         <p className="sidebar-label category-heading">My categories</p>
@@ -251,20 +259,19 @@ function App() {
 
       <div className="workspace">
         <header className="topbar">
-          <div className="breadcrumb"><span>⌂</span><span>Workspace</span><span>›</span><strong>{activeView === 'calendar' ? 'Calendar' : 'My tasks'}</strong></div>
+          <div className="breadcrumb">
+            <span>⌂</span><span>Workspace</span><span>›</span>
+            <strong>{activeView === 'calendar' ? 'Calendar' : activeView === 'planner' ? 'Study planner' : 'My tasks'}</strong>
+          </div>
           <time>{formatDate(new Date())}</time>
         </header>
 
+
         <main className="dashboard">
           <div className="welcome-row">
-            <div>
-              <p className="eyebrow">A little structure. More room for everything you do.</p>
-              <h1>{activeView === 'calendar' ? 'Your calendar' : 'Find your flow, Alex'} <span aria-hidden="true">{activeView === 'calendar' ? '▦' : '✳'}</span></h1>
-              <p className="welcome-caption">{activeView === 'calendar' ? 'Your tasks, right where they belong.' : 'Make space for what matters today.'}</p>
-            </div>
-            <button className="create-button" type="button" onClick={() => { setEditingTask(null); setIsFormOpen(true); }}>
-              <span aria-hidden="true">+</span> Create task
-            </button>
+          <p className="eyebrow">A little structure. More room for everything you do.</p>
+          <h1>{activeView === 'calendar' ? 'Your calendar' : activeView === 'planner' ? 'Your study week' : 'Find your flow, Alex'} <span aria-hidden="true">{activeView === 'tasks' ? '✳' : '▦'}</span></h1>
+          <p className="welcome-caption">{activeView === 'calendar' ? 'Your tasks, right where they belong.' : activeView === 'planner' ? 'Plan your study time around your deadlines.' : 'Make space for what matters today.'}</p>
           </div>
 
           <section className="stats-grid" aria-label="Task summary">
@@ -274,8 +281,10 @@ function App() {
             <article className="stat-card"><div className="stat-label">Completed <span className="stat-icon">✓</span></div><div className="stat-value">{tasks.filter((task) => task.completed).length}<small> nice work so far</small></div></article>
           </section>
 
-          {activeView === 'calendar' ? (
+             {activeView === 'calendar' ? (
             <CalendarView tasks={tasks} today={today} onEdit={handleEdit} />
+          ) : activeView === 'planner' ? (
+            <WeeklyPlanner tasks={tasks} today={today} onEdit={handleEdit} />
           ) : (
             <div className="content-grid">
               <section className="task-section">
