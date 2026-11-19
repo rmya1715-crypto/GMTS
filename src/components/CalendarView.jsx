@@ -56,17 +56,21 @@ function CalendarView({ tasks, today, onEdit }) {
           const currentDate = dateKey(day);
           const dayTasks = tasks.filter((task) => task.dueDate === currentDate);
           const isToday = currentDate === today;
+          const dayHours = dayTasks
+            .filter((task) => !task.completed)
+            .reduce((sum, task) => sum + (Number(task.estimatedHours) || 0), 0);
 
           return (
             <div className={isToday ? 'calendar-cell is-today' : 'calendar-cell'} key={key}>
               <span className="calendar-day-number">{day}</span>
+              {dayHours > 0 && <span className="calendar-day-hours">{dayHours}h study</span>}
               <div className="calendar-day-tasks">
                 {dayTasks.map((task) => (
                   <button
                     className={`calendar-task ${task.category.toLowerCase()}`}
                     key={task.id}
                     type="button"
-                    title={`${task.title} - ${task.category}`}
+                   title={`${task.title} - ${task.category}${task.estimatedHours ? ` - ${task.estimatedHours}h` : ''}`}
                     onClick={() => onEdit(task)}
                   >
                     <span>{task.title}</span>
