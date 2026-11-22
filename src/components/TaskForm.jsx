@@ -5,6 +5,7 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState('medium');
+  const [category, setCategory] = useState('Academic');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -13,12 +14,14 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
       setDescription(editingTask.description);
       setDueDate(editingTask.dueDate);
       setPriority(editingTask.priority);
+      setCategory(editingTask.category || 'Academic');
       setError('');
     } else {
       setTitle('');
       setDescription('');
       setDueDate('');
       setPriority('medium');
+      setCategory('Academic');
       setError('');
     }
   }, [editingTask]);
@@ -38,12 +41,14 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
       description: description.trim(),
       dueDate,
       priority,
+      category,
     });
 
     setTitle('');
     setDescription('');
     setDueDate('');
     setPriority('medium');
+    setCategory('Academic');
     setError('');
   }
 
@@ -52,6 +57,7 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
     setDescription('');
     setDueDate('');
     setPriority('medium');
+    setCategory('Academic');
     setError('');
     onCancel();
   }
@@ -88,6 +94,19 @@ function TaskForm({ onSubmit, editingTask, onCancel }) {
           value={dueDate}
           onChange={(event) => setDueDate(event.target.value)}
         />
+      </div>
+
+      <div className="form-field">
+        <label htmlFor="category">Category</label>
+        <select
+          id="category"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        >
+          <option value="Academic">Academic</option>
+          <option value="Training">Training</option>
+          <option value="Personal">Personal</option>
+        </select>
       </div>
 
       <div className="form-field">
