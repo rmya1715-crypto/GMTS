@@ -3,7 +3,7 @@ import CalendarView from './components/CalendarView.jsx';
 import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/TaskList.jsx';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
-
+import NotificationSettings from './components/NotificationSettings.jsx';
 const SAMPLE_TASKS_VERSION = 1;
 const CATEGORIES = ['Academic', 'Training', 'Personal'];
 
@@ -192,6 +192,24 @@ function App() {
     .sort((first, second) => first.dueDate.localeCompare(second.dueDate))[0];
 
   return (
+    <div className="app">
+      <h1>TaskFlow</h1> 
+      <p>A simple task manager that stores data in your browser.</p> 
+
+      <TaskForm
+        onSubmit={handleSave}
+        editingTask={editingTask}
+        onCancel={handleCancelEdit}
+      />
+
+      <h2>Tasks</h2>
+      <TaskList
+        tasks={tasks}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        onToggleComplete={handleToggleComplete}
+       />
+       <NotificationSettings tasks={tasks} />
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand"><span className="brand-mark">T</span> Taskflow <span className="brand-dot" /></div>
