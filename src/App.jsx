@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TaskForm from './components/TaskForm.jsx';
 import TaskList from './components/TaskList.jsx';
 import { loadTasks, saveTasks } from './services/taskStorage.js';
-
+import NotificationSettings from './components/NotificationSettings.jsx';
 const SAMPLE_TASKS_VERSION = 1;
 
 const SAMPLE_TASKS = [
@@ -128,7 +128,8 @@ function App() {
         onEdit={handleEdit}
         onDelete={handleDelete}
         onToggleComplete={handleToggleComplete}
-      />
+       />
+       <NotificationSettings tasks={tasks} />
     </div>
   );
 }
